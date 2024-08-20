@@ -1,8 +1,11 @@
-const mongoose = require("mongoose");
+import {connect} from "mongoose";
 
 export const connectDB = async ()=> {
     try {
-        await mongoose.connect(process.env.DATABASE_URI)
+        if(process.env.DATABASE_URI)
+            await connect(process.env.DATABASE_URI)
+        else
+            throw new Error("Something Horribly went Wrong")
     }catch(err) {
         console.error(err);
     }

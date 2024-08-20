@@ -1,18 +1,19 @@
 import { Request, RequestHandler, Response } from "express"
-import { User } from "../models/User"
 import bcrypt from "bcrypt"
 import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken"
+import { User } from "../helpers/decorator"
+import {dec} from "../helpers/decorator";
 
-export const getAllUsers : RequestHandler = async (req:Request,res:Response)=> {
+export const getAllUsers : RequestHandler = dec(async (req:Request,res:Response)=> {
     const users = await User.find({})
     return res.status(200).json({
         data : {
             users
         }
     })
-}
+})
 
-export const createUser : RequestHandler = async(req:Request, res:Response)=> {
+export const createUser : RequestHandler = dec(async(req:Request, res:Response)=> {
     const {firstName,lastName,username,password} = req.body;
 
     if(!firstName || !lastName || !username || !password) {
@@ -36,9 +37,9 @@ export const createUser : RequestHandler = async(req:Request, res:Response)=> {
             user
         }
     });
-}
+})
 
-export const updateUser : RequestHandler = async(req:Request,res : Response) => {
+export const updateUser : RequestHandler = dec(async(req:Request,res : Response) => {
     const {ObjectId} = req.body;
 
     if(!ObjectId) return res.status(400).json({
@@ -64,9 +65,9 @@ export const updateUser : RequestHandler = async(req:Request,res : Response) => 
             user : newUser
         }
     })
-}
+})
 
-export const deleteUser : RequestHandler  = async (req: Request, res : Response) => {
+export const deleteUser : RequestHandler  = dec(async (req: Request, res : Response) => {
     const {ObjectId} = req.body;
 
     if(!ObjectId) return res.json({
@@ -85,8 +86,9 @@ export const deleteUser : RequestHandler  = async (req: Request, res : Response)
             user
         }
     })
-}
-export const findById : RequestHandler= async (req: Request, res : Response) => {
+})
+
+export const findById : RequestHandler= dec(async (req: Request, res : Response) => {
     const ObjectId = req.body.id;
 
     if(!ObjectId) return res.json({
@@ -104,9 +106,9 @@ export const findById : RequestHandler= async (req: Request, res : Response) => 
             user
         }
     })
-}
+})
 
-export const loginUser = async (req: Request, res : Response) => {
+export const loginUser = dec(async (req: Request, res : Response) => {
     const {username,password} = req.body;
 
     if(!username || !password) {
@@ -155,10 +157,10 @@ export const loginUser = async (req: Request, res : Response) => {
     return res.status(400).json({
         error: "Something Horribly Went wrong"
     })
-}
+})
 
 
-export const getAllPostByUser = async (req : Request,res : Response)=> {
+export const getAllPostByUser = dec(async (req : Request,res : Response)=> {
     const {username} = req.params;
 
     if(!username)
@@ -179,9 +181,9 @@ export const getAllPostByUser = async (req : Request,res : Response)=> {
             posts : user.posts
         }
     })
-}
+})
 
-export const getAccessToken = async (req : Request, res : Response) => {
+export const getAccessToken = dec(async (req : Request, res : Response) => {
     const refreshToken = req.cookies["jwt"];
     if(!refreshToken) return res.sendStatus(400);
 
@@ -201,4 +203,4 @@ export const getAccessToken = async (req : Request, res : Response) => {
             accessToken
         })
     });
-}
+})

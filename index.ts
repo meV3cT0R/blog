@@ -6,13 +6,14 @@ import UserRouter from "./src/routes/users";
 import cors from "cors";
 import { corsOption } from "./src/config/cors";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
-require("dotenv").config();
-const app = express();
+dotenv.config();
+const app : express.Application = express();
 
 const PORT = 8080
 
-connectDB();
+void connectDB();
 
 app.use(cors(corsOption))
 app.use(express.urlencoded({ extended: false }))
