@@ -33,7 +33,7 @@ export class App {
                 })
             })
             
-            return resolve();
+            resolve();
         })
     }
 

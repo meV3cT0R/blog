@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { dec, Post, User } from "../helpers/decorator";
 
 
-export const getAllPosts = dec(async (req: Request, res: Response) => {
+export const getAllPosts = dec(async (_: Request, res: Response) => {
     const posts = await Post.find({})
     res.status(200).json({
         data: {

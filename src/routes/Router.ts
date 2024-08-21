@@ -11,6 +11,6 @@ export const router = (masterRouter : ExpressRouter,errorMiddleware : ErrorMiddl
             .use(bodyParser.json())
             .use(bodyParser.urlencoded({extended:false}))
             .use("/",masterRouter)
-            .all("*",errorMiddleware.catchAll)
+            .all("*",errorMiddleware.catchAll.bind(errorMiddleware))
     return router;
 }
