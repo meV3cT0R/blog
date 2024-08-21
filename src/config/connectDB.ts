@@ -1,6 +1,6 @@
 import {connect} from "mongoose";
 
-export const connectDB = async ()=> {
+export const connectMongoose = async ()=> {
     try {
         if(process.env.DATABASE_URI)
             await connect(process.env.DATABASE_URI)
@@ -10,3 +10,5 @@ export const connectDB = async ()=> {
         console.error(err);
     }
 }
+
+

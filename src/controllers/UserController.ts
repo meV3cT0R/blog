@@ -4,6 +4,7 @@ import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken"
 import { User } from "../helpers/decorator"
 import {dec} from "../helpers/decorator";
 
+
 export const getAllUsers : RequestHandler = dec(async (req:Request,res:Response)=> {
     const users = await User.find({})
     return res.status(200).json({

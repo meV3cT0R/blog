@@ -1,5 +1,5 @@
 import { NextFunction, Response,Request } from "express";
-import { User } from "../models/User";
+import { User } from "../helpers/decorator";
 
 export const verifyAuthorized = async (req : Request,res:Response,next:NextFunction) => {
    const refreshToken = req.cookies["jwt"];

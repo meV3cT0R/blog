@@ -2,13 +2,13 @@ import { Router } from "express";
 import { createPost, getAllPosts, likePost } from "../controllers/PostController";
 import { verifyJWT } from "../middlewares/verifyJWT";
 
-const router = Router();
 
-router.route("/")
-        .get(getAllPosts)
-        .post(verifyJWT,createPost)
+export const postRouteHandler = (router: Router) => {
+        router.route("/posts")
+                .get(getAllPosts)
+                .post(verifyJWT, createPost)
 
-router.route("/like")
-        .post(verifyJWT,likePost)
+        router.route("/posts/like")
+                .post(verifyJWT, likePost)
+}
 
-export default router;
