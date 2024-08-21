@@ -38,7 +38,7 @@ export class App {
     }
 
     private connectDB() : void {
-        connectMongoose().catch(err=> {
+        connectMongoose().catch((err : unknown)=> {
             if(err instanceof Error){
                 console.error(err.message)
             }

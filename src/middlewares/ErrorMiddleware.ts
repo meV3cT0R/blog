@@ -7,8 +7,6 @@ export class ErrorMiddleware {
             res.status(404).json({
                 message: "404 - Page not found"
             })
-        } else if (cType == "text/html") {
-            res.status(404).send("<h1> 404 - Page not found </h1>")
         } else {
             res.status(404).send("404 - Page not Found")
         }

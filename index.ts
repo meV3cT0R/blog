@@ -27,7 +27,7 @@ new App(
 
     ),
         new ErrorMiddleware()
-    )).start(PORT).catch(err => {
+    )).start(PORT).catch((err :unknown) => {
         if (err instanceof Error) {
             console.error(err.message)
         }
