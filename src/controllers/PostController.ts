@@ -1,17 +1,18 @@
 import { Request, Response } from "express";
-import { dec, Post, User } from "../helpers/decorator";
+import { Post } from "../models/Post";
+import { User } from "../models/User";
 
 
-export const getAllPosts = dec(async (_: Request, res: Response) => {
+export const getAllPosts = async (_: Request, res: Response) => {
     const posts = await Post.find({})
     res.status(200).json({
         data: {
             posts
         }
     })
-})
+}
 
-export const createPost = dec(async (req: Request, res: Response) => {
+export const createPost = async (req: Request, res: Response) => {
     const { title, content, username } = req.body;
 
     if (!title || !content || !username)
@@ -35,10 +36,10 @@ export const createPost = dec(async (req: Request, res: Response) => {
             posts
         }
     })
-})
+}
 
 
-export const likePost = dec(async (req: Request, res: Response) => {
+export const likePost = async (req: Request, res: Response) => {
     const { postId, username } = req.body;
 
     if (!postId || !username) {
@@ -82,6 +83,6 @@ export const likePost = dec(async (req: Request, res: Response) => {
             post
         }
     })
-})
+}
 
 

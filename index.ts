@@ -10,7 +10,7 @@ import { masterRouter } from "./src/routes/masterRouter";
 import { ErrorMiddleware } from "./src/middlewares/ErrorMiddleware";
 // dotenv.config();
 
-const PORT = 8080
+const PORT = parseInt(process.env.PORT as string) || 8080
 
 // connectDB().catch(err => {
 //     console.error(err);
@@ -27,7 +27,7 @@ new App(
 
     ),
         new ErrorMiddleware()
-    )).start(PORT).catch((err :unknown) => {
+    )).start(PORT).catch((err: unknown) => {
         if (err instanceof Error) {
             console.error(err.message)
         }
